@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tienda</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<!-- MODAL PREVIEW -->
+<div id="item-modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <img id="modal-img" src="" alt="">
+    <h3 id="modal-name"></h3>
+    <p id="modal-desc"></p>
+  </div>
+</div>
+
+<body>
+
+<h1>🛒 Tienda</h1>
+
+  <div class="featured-banner">
+  TEMPORADA 9 - TIENDA
+</div>
+
+<!-- ================= PERSONAJES ================= -->
+<h2>Personajes</h2>
+<div class="shop">
+  <!-- PERSONAJE ESTRELLA: HyperMia -->
+  <div class="item rare-purple clickable" data-desc="HyperMia es un personaje legendario..." data-rare="purple">
+    <span class="star-badge">⭐</span>
+    <div class="item-image">
+      <img class="item-shine" src="decoration/Shine.png" alt="">
+      <img src="items/HyperMia.png" alt="HyperMia">
+    </div>
+    <h3 class="gradient-text">HyperMia</h3>
+    <p class="price">💰 2500</p>
+  </div>
+
+  <!-- PERSONAJE ESTRELLA: HyperDecro -->
+  <div class="item rare-purple clickable" data-desc="HyperDecro domina el combate aéreo..." data-rare="purple">
+    <span class="star-badge">⭐</span>
+    <div class="item-image">
+      <img class="item-shine" src="decoration/Shine.png" alt="">
+      <img src="items/HyperDecro.png" alt="HyperDecro">
+    </div>
+    <h3 class="gradient-text">HyperDecro</h3>
+    <p class="price">💰 2500</p>
+  </div>
+
+  <!-- Personaje normal: Mia -->
+  <div class="item rare-gray clickable" data-desc="Mia es un personaje básico." data-rare="gray">
+    <div class="item-image">
+      <img src="items/Mia.png" alt="Mia">
+    </div>
+    <h3>Mia</h3>
+    <p class="price">💰 500</p>
+  </div>
+</div>
+
+<!-- ================= RASTROS ================= -->
+<h2>Rastros</h2>
+<div class="shop">
+  <div class="item rare-gray clickable" data-desc="Rastro Básico para tu vehículo." data-rare="gray">
+    <div class="item-image">
+      <img src="items/item_001.png" alt="Rastro Básico">
+    </div>
+    <h3>Rastro Básico</h3>
+    <p class="price">💰 100</p>
+  </div>
+</div>
+
+<!-- ================= GORROS ================= -->
+<h2>Gorros</h2>
+<div class="shop">
+  <div class="item rare-gray clickable" data-desc="Gorro Simple para personalizar." data-rare="gray">
+    <div class="item-image">
+      <img src="items/gorro_001.png" alt="Gorro">
+    </div>
+    <h3>Gorro Simple</h3>
+    <p class="price">💰 150</p>
+  </div>
+</div>
+
+<!-- ================= EQUIPAJE ================= -->
+<h2>Equipaje</h2>
+<div class="shop">
+  <div class="item rare-gray clickable" data-desc="Mochila básica para tus aventuras." data-rare="gray">
+    <div class="item-image">
+      <img src="items/equipaje_001.png" alt="Equipaje">
+    </div>
+    <h3>Mochila Básica</h3>
+    <p class="price">💰 200</p>
+  </div>
+</div>
+
+
+
+</div>
+
+<script>
+const modal = document.getElementById("item-modal");
+const modalImg = document.getElementById("modal-img");
+const modalName = document.getElementById("modal-name");
+const modalDesc = document.getElementById("modal-desc");
+
+// selector seguro del botón de cerrar
+const closeBtn = modal.querySelector(".close");
+
+// Abrir modal al click de cada item
+document.querySelectorAll(".clickable").forEach(item => {
+  item.addEventListener("click", () => {
+    const img = item.querySelector("img:not(.item-shine)").src;
+    const name = item.querySelector("h3").textContent;
+    const desc = item.dataset.desc || item.querySelector("p.price").textContent;
+    const rare = item.dataset.rare || "gray";
+
+    modalImg.src = img;
+    modalName.textContent = name;
+    modalDesc.textContent = desc;
+
+    // quitar clases anteriores
+    modalName.className = "";
+    modalDesc.className = "";
+
+    // glow según rareza
+    if(rare === "purple"){
+      modalName.classList.add("glow-purple");
+      modalDesc.classList.add("glow-purple");
+    } else if(rare === "gray"){
+      modalName.classList.add("glow-gray");
+      modalDesc.classList.add("glow-gray");
+    }
+
+    modal.style.display = "flex";
+  });
+});
+
+// Cerrar modal al click de X
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
+// Cerrar modal al click fuera del contenido
+modal.addEventListener("click", e => {
+  if (e.target === modal) modal.style.display = "none";
+});
+
+
+// Para cada item
+document.querySelectorAll(".clickable").forEach(item => {
+  item.addEventListener("click", () => {
+    const img = item.querySelector("img:not(.item-shine)").src;
+    const name = item.querySelector("h3").textContent;
+    const desc = item.dataset.desc || item.querySelector("p.price").textContent;
+    const rare = item.dataset.rare || "gray";
+
+    // set contenido del modal
+    modalImg.src = img;
+    modalName.textContent = name;
+    modalDesc.textContent = desc;
+
+    // primero limpiamos clases de rareza
+    modalName.className = "";
+    modalDesc.className = "";
+
+    // agregamos glow según rareza
+    if(rare === "purple"){
+      modalName.classList.add("glow-purple");
+      modalDesc.classList.add("glow-purple");
+    } else if(rare === "gray"){
+      modalName.classList.add("glow-gray");
+      modalDesc.classList.add("glow-gray");
+    }
+
+    modal.style.display = "flex";
+  });
+});
+</script>
+
+
+</body>
+</html>

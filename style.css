@@ -1,0 +1,289 @@
+@font-face {
+  font-family: "Zyzol";
+  src: url("fonts/zyzol.otf") format("opentype");
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
+  color: #ffffff;
+
+  background: linear-gradient(
+    180deg,
+    #f7e08c 0%,
+    #e6b94f 55%,
+    #cfa63a 100%
+  );
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+
+
+h1 {
+  margin: 20px 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.shop {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  padding: 24px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+h2 {
+  max-width: 1100px;
+  margin: 30px auto 12px;
+  padding: 0 24px;
+  font-weight: 700;
+  text-align: left;
+}
+
+/* CARD BASE */
+.item {
+  position: relative;
+  background: linear-gradient(180deg, #1c1c1c, #141414);
+  border-radius: 18px;
+  padding: 14px;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+  overflow: hidden;
+}
+
+.item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.6);
+}
+
+/* IMAGEN */
+.item img {
+  width: 100%;
+  height: 230px;
+  object-fit: contain;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,.6));
+}
+
+/* TEXTO */
+.item h3 {
+  margin: 10px 0 4px;
+  font-size: 1rem;
+}
+
+.price {
+  font-size: .9rem;
+  opacity: .85;
+}
+
+/* RAREZAS */
+.rare-gray {
+  outline: 1px solid rgba(255,255,255,.15);
+}
+
+.rare-purple::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 18px;
+  background: linear-gradient(
+    270deg,
+    #7c3aed,
+    #ec4899,
+    #6366f1
+  );
+  background-size: 400% 400%;
+  animation: glowMove 6s linear infinite;
+  z-index: 0;
+}
+
+.rare-purple::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: linear-gradient(180deg, #1c1c1c, #141414);
+  border-radius: 16px;
+  z-index: 1;
+}
+
+/* CONTENIDO SOBRE EL GLOW */
+.rare-purple > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* TEXTO MORADO */
+.gradient-text {
+  background: linear-gradient(270deg, #c084fc, #f472b6, #818cf8);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textMove 3s ease infinite;
+}
+
+/* PERSONAJES SE VEN MÁS IMPORTANTES */
+.item img[alt*="Hyper"],
+.item img[alt="Mia"] {
+  height: 260px;
+}
+
+/* ANIMACIONES */
+@keyframes glowMove {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes textMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.star-item {
+  box-shadow:
+    0 0 0 1px rgba(255, 215, 0, 0.3),
+    0 10px 30px rgba(255, 200, 50, 0.35);
+}
+
+.item {
+  position: relative;
+}
+
+.star-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 1.6rem;
+  z-index: 10;
+}
+
+.featured-banner {
+  width: 100%;
+  margin: 10px 0 20px 0;
+  padding: 10px 0;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ffd700, #ff9f00);
+  color: #2b1b00;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(255, 200, 0, 0.6);
+}
+
+.item {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centra horizontalmente h3, precio, etc */
+}
+
+.item-image {
+  position: relative;
+  display: flex;
+  align-items: center;   /* centra verticalmente */
+  justify-content: center; /* centra horizontalmente */
+  width: 100%;
+  height: 180px; /* ajusta según tamaño del personaje */
+}
+
+.item-image img {
+  max-height: 100%;
+  display: block;
+  z-index: 2; /* personaje encima del shine */
+}
+
+.item-shine {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: auto;
+  z-index: 1;
+  animation: spin 20s linear infinite;
+  pointer-events: none;
+}
+
+/* estrella absolutamente posicionada para no mover nada */
+.star-badge {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 3;
+  font-size: 20px;
+}
+
+.item > .star-badge,
+.item > h3,
+.item > p {
+  position: relative;
+  z-index: 3; /* encima del shine */
+}
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Fondo semi-transparente */
+.modal {
+  display: none; /* oculto por defecto */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenido central */
+.modal-content {
+  background: #3a3a3a;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+}
+
+.modal-content img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+/* Botón cerrar */
+.modal-content .close {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.glow-purple {
+  background: linear-gradient(90deg, #ff00ff, #a000ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  z-index: 3; /* encima del shine */
+  text-shadow: 0 0 8px rgba(255,0,255,0.7), 0 0 16px rgba(160,0,255,0.5);
+}
+
+.glow-gray {
+  color: #aaa;
+}
+
+body {
+  font-family: 'Zyzol', sans-serif;
+  font-weight: 200; /* Prueba con 300 (Light) o 400 (Normal) */
+}
